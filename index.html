@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banana Bliss - Shirt Store</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #3a86ff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #3a86ff;
+        }
+
+        .icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .icon {
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        .icon:hover {
+            color: #3a86ff;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Product Section */
+        .product-section {
+            padding: 40px 0;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .product-images {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .thumbnail {
+            width: 70px;
+            height: 70px;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            object-fit: cover;
+        }
+
+        .thumbnail:hover, .thumbnail.active {
+            opacity: 1;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-details {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 5px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: #6c757d;
+        }
+
+        .breadcrumb a {
+            color: #6c757d;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .product-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .size-chart-btn {
+            color: #3a86ff;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 15px;
+            border: none;
+            background: none;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #212529;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            color: #ffc107;
+        }
+
+        .review-count {
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .product-description {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: #495057;
+        }
+
+        .color-options {
+            margin-bottom: 20px;
+        }
+
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .color-list {
+            display: flex;
+            gap: 10px;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .color-option:hover, .color-option.active {
+            transform: scale(1.1);
+            border-color: #333;
+        }
+
+        .color-yellow {
+            background-color: #ffdd00;
+        }
+
+        .color-blue {
+            background-color: #3a86ff;
+        }
+
+        .color-green {
+            background-color: #38b000;
+        }
+
+        .color-red {
+            background-color: #ff5c5c;
+        }
+
+        .size-options {
+            margin-bottom: 25px;
+        }
+
+        .size-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .size-option {
+            padding: 8px 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .size-option:hover, .size-option.active {
+            background-color: #3a86ff;
+            color: white;
+            border-color: #3a86ff;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ced4da;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background-color: #e9ecef;
+        }
+
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            border: 1px solid #ced4da;
+            text-align: center;
+            font-size: 16px;
+            border-left: none;
+            border-right: none;
+        }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .add-to-cart, .buy-now {
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+            border: none;
+        }
+
+        .add-to-cart {
+            background-color: #3a86ff;
+            color: white;
+            flex: 2;
+        }
+
+        .add-to-cart:hover {
+            background-color: #2a75f0;
+        }
+
+        .buy-now {
+            background-color: #212529;
+            color: white;
+            flex: 1;
+        }
+
+        .buy-now:hover {
+            background-color: #000;
+        }
+
+        .additional-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Recommendations Section */
+        .recommendations {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .scroll-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            font-size: 18px;
+            border: none;
+        }
+
+        .scroll-left {
+            left: 10px;
+        }
+
+        .scroll-right {
+            right: 10px;
+        }
+
+        .product-card-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 10px 5px;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+            &::-webkit-scrollbar {
+                display: none; /* Chrome, Safari, Opera */
+            }
+            -ms-overflow-style: none; /* IE and Edge */
+            &::-webkit-scrollbar {
+                display: none; /* Chrome, Safari, Opera */
+            }
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        .product-card-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .product-card {
+            min-width: 250px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card-details {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #212529;
+        }
+
+        .card-price {
+            color: #3a86ff;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .card-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #333;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .size-chart-img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .size-chart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .size-chart-table th, .size-chart-table td {
+            border: 1px solid #ced4da;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .size-chart-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .size-chart-note {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #212529;
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .footer-description {
+            color: #adb5bd;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #343a40;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            background-color: #3a86ff;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 10px;
+        }
+
+        .footer-link a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-link a:hover {
+            color: white;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: #adb5bd;
+        }
+
+        .contact-icon {
+            color: #3a86ff;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 14px;
+        }
+
+        .newsletter-button {
+            background-color: #3a86ff;
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .newsletter-button:hover {
+            background-color: #2a75f0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #343a40;
+            padding-top: 20px;
+            text-align: center;
+            color: #adb5bd;
+            font-size: 14px;
+        }
+        /* About Section Styles */
+        .about-section {
+            padding: 80px 0;
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(231,76,60,0.1) 0%, rgba(231,76,60,0) 70%);
+            z-index: 0;
+        }
+        
+        .about-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(231,76,60,0.08) 0%, rgba(231,76,60,0) 70%);
+            z-index: 0;
+        }
+        
+        .about-header {
+            text-align: center;
+            margin-bottom: 70px;
+            position: relative;
+            padding-bottom: 30px;
+        }
+        
+        .about-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(to right, transparent, #e74c3c, transparent);
+        }
+        
+        .about-header h2 {
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .about-header h2:hover {
+            transform: scale(1.05);
+            color: #e74c3c;
+        }
+        
+        .about-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+            line-height: 1.8;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .about-header:hover p {
+            transform: translateY(5px);
+        }
+        
+        .about-content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+            transition: all 0.5s ease;
+            padding: 20px;
+            border-radius: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .about-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(231, 76, 60, 0.1);
+            background: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+        }
+        
+        .about-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.05) 0%, rgba(255,255,255,0) 100%);
+            z-index: -1;
+            border-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .about-content:hover::before {
+            opacity: 1;
+        }
+        
+        .about-text {
+            flex: 1;
+            transition: transform 0.3s ease;
+            padding: 15px;
+        }
+        
+        .about-content:hover .about-text {
+            transform: translateX(5px);
+        }
+        
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+            position: relative;
+            padding-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .about-text h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #e74c3c;
+            transition: width 0.5s ease;
+        }
+        
+        .about-content:hover .about-text h3::after {
+            width: 100px;
+        }
+        
+        .about-content:hover .about-text h3 {
+            color: #e74c3c;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            font-size: 16px;
+            opacity: 0.9;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(0);
+        }
+        
+        .about-content:hover .about-text p {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+        
+        .about-text p strong {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+        
+        .about-content:hover .about-image {
+            transform: scale(1.03);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(231, 76, 60, 0);
+            transition: background 0.5s ease;
+            z-index: 1;
+        }
+        
+        .about-content:hover .about-image::before {
+            background: rgba(231, 76, 60, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        
+        .about-content:hover .about-image img {
+            transform: scale(1.1);
+        }
+        
+
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .header-container {
+                padding: 15px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .product-container {
+                flex-direction: column;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .add-to-cart, .buy-now {
+                width: 100%;
+            }
+
+            .footer-column {
+                flex: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">StyleHub</div>
+            <nav class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Shop</a>
+                <a href="#">Collections</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+            <div class="icons">
+                <div class="icon">🔍</div>
+                <div class="icon">👤</div>
+                <div class="icon">♥</div>
+                <div class="icon">🛒</div>
+            </div>
+            <div class="mobile-menu">☰</div>
+        </div>
+    </header>
+    <!-- About Us Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-header">
+                <h2>About StyleHub</h2>
+                <p>Your premier destination for high-quality fashion and fabrics since 2010. We're committed to bringing you the latest trends and timeless classics.</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Story</h3>
+                    <p>StyleHub was founded in 2010 with a simple mission: to provide fashion enthusiasts with high-quality clothing and fabrics that don't compromise on style or sustainability. What began as a small boutique in Style City has now grown into a global brand recognized for its commitment to excellence.</p>
+                    <p>Our founder, Jane Smith, started with a passion for textiles and a vision to create a company that celebrates craftsmanship while embracing modern trends. Today, that vision continues to drive everything we do at StyleHub.</p>
+                    <p>We work directly with ethical manufacturers and artisans around the world to bring you unique pieces that tell a story. Our collections range from everyday essentials to statement pieces that stand the test of time.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840/bbbe40193151771.65e7325085f67.png" alt="StyleHub store">
+                </div>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/00ece3193151771.65e7325008d1b.png" alt="StyleHub fabrics">
+                </div>
+                <div class="about-text">
+                    <h3>Our Values</h3>
+                    <p><strong>Quality:</strong> We believe in creating products that last. Each item is crafted with attention to detail using premium materials.</p>
+                    <p><strong>Sustainability:</strong> We're committed to responsible production practices that minimize environmental impact while maximizing social benefit.</p>
+                    <p><strong>Innovation:</strong> We continuously explore new techniques and technologies to enhance our products and services.</p>
+                    <p><strong>Community:</strong> We value the relationships we build with our customers, partners, and the communities we serve.</p>
+                </div>
+            </div>
+
+    <!-- Product Section -->
+    <section class="product-section">
+        <div class="container product-container">
+            <div class="product-images">
+                <img src="https://th.bing.com/th/id/OPAC.wUMxqotMI9qSdw474C474?w=592&h=550&o=5&dpr=1.3&pid=21.1" alt="Banana Bliss Oversized T-shirt" class="main-image" id="main-product-image">
+                <div class="thumbnail-container">
+                    <img src="https://assets.ajio.com/medias/sys_master/root/20240807/9p3M/66b381396f60443f31f3e4ce/-473Wx593H-469673201-green-MODEL2.jpg" alt="Thumbnail 1" class="thumbnail active" onclick="changeImage(this, '/api/placeholder/500/600')">
+                    <img src="https://assets.ajio.com/medias/sys_master/root/20240807/qLW6/66b3838d6f60443f31f3f349/-473Wx593H-469673201-green-MODEL7.jpg" alt="Thumbnail 2" class="thumbnail" onclick="changeImage(this, '/api/placeholder/500/600')">
+                    <img src="https://assets.ajio.com/medias/sys_master/root/20240807/qLW6/66b3838d6f60443f31f3f349/-473Wx593H-469673201-green-MODEL7.jpg" alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this, '/api/placeholder/500/600')">
+                    <img src="https://assets.ajio.com/medias/sys_master/root/20240807/qLW6/66b3838d6f60443f31f3f349/-473Wx593H-469673201-green-MODEL7.jpg" alt="Thumbnail 4" class="thumbnail" onclick="changeImage(this, '/api/placeholder/500/600')">
+                </div>
+            </div>
+
+            <div class="product-details">
+                <div class="breadcrumb">
+                    <a href="#">Home</a> / <a href="#">Shop</a> / <a href="#">T-shirts</a> / Banana Bliss
+                </div>
+                <h1 class="product-title">Banana Bliss Oversized T-shirt</h1>
+                <button class="size-chart-btn" id="size-chart-button">Size Chart</button>
+                <div class="product-price">$29.99</div>
+                <div class="product-rating">
+                    <div class="stars">★★★★★</div>
+                    <div class="review-count">(42 reviews)</div>
+                </div>
+                <p class="product-description">
+                    The Banana Bliss Oversized T-shirt combines comfort and style with its premium cotton fabric and relaxed fit. 
+                    Perfect for casual outings or lounging at home, this vibrant yellow tee features a subtle banana print that adds a playful touch to your wardrobe.
+                </p>
+
+                <div class="color-options">
+                    <div class="option-title">Color</div>
+                    <div class="color-list">
+                        <div class="color-option color-yellow active" onclick="selectColor(this)"></div>
+                        <div class="color-option color-blue" onclick="selectColor(this)"></div>
+                        <div class="color-option color-green" onclick="selectColor(this)"></div>
+                        <div class="color-option color-red" onclick="selectColor(this)"></div>
+                    </div>
+                </div>
+
+                <div class="size-options">
+                    <div class="option-title">Size</div>
+                    <div class="size-list">
+                        <div class="size-option" onclick="selectSize(this)">XS</div>
+                        <div class="size-option" onclick="selectSize(this)">S</div>
+                        <div class="size-option active" onclick="selectSize(this)">M</div>
+                        <div class="size-option" onclick="selectSize(this)">L</div>
+                        <div class="size-option" onclick="selectSize(this)">XL</div>
+                        <div class="size-option" onclick="selectSize(this)">XXL</div>
+                    </div>
+                </div>
+
+                <div class="quantity-selector">
+                    <button class="quantity-btn" onclick="decrementQuantity()">-</button>
+                    <label for="quantity" class="sr-only">Quantity</label>
+                    <input type="number" min="1" value="1" class="quantity-input" id="quantity" placeholder="Enter quantity">
+                    <button class="quantity-btn" onclick="incrementQuantity()">+</button>
+                </div>
+
+                <div class="actions">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                </div>
+
+                <div class="additional-info">
+                    <div class="info-item">
+                        <span class="info-icon">🚚</span>
+                        <span>Free shipping on orders over $50</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">↩️</span>
+                        <span>30-day easy returns</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">🔒</span>
+                        <span>Secure checkout</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section class="recommendations">
+        <div class="container">
+            <h2 class="section-title">You May Also Like</h2>
+            <div class="scroll-container">
+                <button class="scroll-button scroll-left" onclick="scrollRecommendations('left')">❮</button>
+                <div class="product-card-container" id="recommendation-container">
+                    <!-- Product Card 1 -->
+                    <div class="product-card">
+                        <img src="https://th.bing.com/th/id/OIP.Qz_RrOD4p30SRV5JE0iRFwHaJQ?rs=1&pid=ImgDetMain" alt="Product 1" class="card-image">
+                        <div class="card-details">
+                            <h3 class="card-title">Sunshine Yellow Hoodie</h3>
+                            <div class="card-price">$39.99</div>
+                            <div class="card-rating">
+                                <div class="stars">★★★★☆</div>
+                                <span>(28)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 2 -->
+                    <div class="product-card">
+                        <img src="https://www.bing.com/th?id=OPAC.jv4ttBACptX5pA474C474&o=5&pid=21.1&w=207&h=207&rs=1&qlt=100&dpr=1.3&c=8&pcl=f5f5f5" alt="Product 2" class="card-image">
+                        <div class="card-details">
+                            <h3 class="card-title">Classic White Tee</h3>
+                            <div class="card-price">$24.99</div>
+                            <div class="card-rating">
+                                <div class="stars">★★★★★</div>
+                                <span>(56)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 3 -->
+                    <div class="product-card">
+                        <img src="https://th.bing.com/th/id/OIP.e0wPHwrpM2Cq-Of9NKLn5wHaHa?w=215&h=216&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Product 2" class="card-image">
+                        <div class="card-details">
+                            <h3 class="card-title">Summer Vibes Tank Top</h3>
+                            <div class="card-price">$19.99</div>
+                            <div class="card-rating">
+                                <div class="stars">★★★★☆</div>
+                                <span>(37)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 4 -->
+                    <div class="product-card">
+                        <img src="https://static.vecteezy.com/system/resources/previews/025/500/307/large_2x/men-s-navy-blue-collar-neck-solid-polo-t-shirt-mockup-ai-generative-photo.jpg" alt="Product 2" class="card-image">
+                        <div class="card-details">
+                            <h3 class="card-title">Navy Blue Polo</h3>
+                            <div class="card-price">$34.99</div>
+                            <div class="card-rating">
+                                <div class="stars">★★★★★</div>
+                                <span>(42)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 5 -->
+                    <div class="product-card">
+                        <img src="https://th.bing.com/th/id/OIP.s9Zq-FPkGG75yUzhY7ozJQHaLH?rs=1&pid=ImgDetMain" alt="Product 5" class="card-image">
+                        <div class="card-details">
+                            <h3 class="card-title">Striped Long Sleeve</h3>
+                            <div class="card-price">$32.99</div>
+                            <div class="card-rating">
+                                <div class="stars">★★★★☆</div>
+                                <span>(19)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 6 -->
+                    <div class="product-card">
+                        <img src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/689445/01/mod01/fnd/IND/fmt/png/Men's-Round-Graphic-Slim-Fit-Tee" alt="Product 2" class="card-image">
+                        <div class="card-details">
+                            <h3 class="card-title">Black Graphic Tee</h3>
+                            <div class="card-price">$27.99</div>
+                            <div class="card-rating">
+                                <div class="stars">★★★★★</div>
+                                <span>(31)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 7 -->
+                    <div class="product-card">
+                        <img src="data:image/jpeg;base64,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" alt="Product 2" class="card-image">
+                        <div class="card-details">
+                            <h3 class="card-title">Vintage Wash Tee</h3>
+                            <div class="card-price">$26.99</div>
+                            <div class="card-rating">
+                                <div class="stars">★★★★☆</div>
+                                <span>(24)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 8 -->
+                    <div class="product-card">
+                        <img src="https://th.bing.com/th/id/OPAC.wUMxqotMI9qSdw474C474?w=592&h=550&o=5&dpr=1.3&pid=21.1" alt="Product 2" class="card-image">
+                        <div class="card-details">
+                            <h3 class="card-title">Green Pocket Tee</h3>
+                            <div class="card-price">$23.99</div>
+                            <div class="card-rating">
+                                <div class="stars">★★★★☆</div>
+                                <span>(17)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="scroll-button scroll-right" onclick="scrollRecommendations('right')">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <div class="footer-logo">StyleHub</div>
+                    <p class="footer-description">
+                        We curate high-quality clothing items for the style-conscious consumer. Our mission is to provide comfort, style, and sustainability in every piece.
+                    </p>
+                    <div class="social-icons">
+                        <div class="social-icon">f</div>
+                        <div class="social-icon">t</div>
+                        <div class="social-icon">in</div>
+                        <div class="social-icon">ig</div>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-title">Shop</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">T-shirts</a></li>
+                        <li class="footer-link"><a href="#">Hoodies</a></li>
+                        <li class="footer-link"><a href="#">Pants</a></li>
+                        <li class="footer-link"><a href="#">Accessories</a></li>
+                        <li class="footer-link"><a href="#">New Arrivals</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-title">Help</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">FAQ</a></li>
+                        <li class="footer-link"><a href="#">Shipping</a></li>
+                        <li class="footer-link"><a href="#">Returns</a></li>
+                        <li class="footer-link"><a href="#">Track Order</a></li>
+                        <li class="footer-link"><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 class="footer-title">Contact</h3>
+                    <div class="contact-info-item">
+                        <span class="contact-icon">📍</span>
+                        <span>123 Fashion Street, Style City, SC 12345</span>
+                    </div>
+                    <div class="contact-info-item">
+                        <span class="contact-icon">📞</span>
+                        <span>+1 (123) 456-7890</span>
+                    </div>
+                    <div class="contact-info-item">
+                        <span class="contact-icon">✉️</span>
+                        <span>info@stylehub.com</span>
+                    </div>
